@@ -6,6 +6,7 @@ This simple web application generates QR codes for your messages. It includes a 
 - [Introduction](#introduction)
 - [Technologies Used](#technologies-used)
 - [How to Use](#how-to-use)
+- [Deployment](#deployment)
 - [License](#license)
 - [Author](#author)
 
@@ -27,6 +28,10 @@ This project is a QR code generator implemented in HTML and JavaScript. It uses 
 2. Enter your message in the input field.
 3. Click the "Create" button to generate the QR code.
 4. Once generated, a download button will appear. Click it to download the QR code as an image (`qrcode.jpg`).
+
+## Deployment
+
+The application is deployed and accessible at [https://jovial-clafoutis-935a81.netlify.app/](https://jovial-clafoutis-935a81.netlify.app/).
 
 ## License
 
