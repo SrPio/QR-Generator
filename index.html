@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QR Code Generator</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,600;0,800;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Import QRCode library -->
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
+    <!-- Import html2canvas library -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  </head>
+  <body>
+    <div class="container--main">
+      <h1>QR Code Generator</h1>
+
+      <div class="container--qr">
+        <div id="qrcode"></div>
+        <!-- Button to download QR Code as image -->
+        <button
+          class="btn--download"
+          id="downloadBtn"
+          style="display: none"
+          onclick="downloadQRCode()"
+        >
+          <img src="./assets/download-svgrepo-com.svg" alt="download icon" />
+        </button>
+      </div>
+
+      <div class="container--content">
+        <input type="text" id="urlInput" placeholder="Enter your message" />
+        <button class="btn--generate btn-style510" onclick="generateQRCode()">
+          Create
+          <img src="./assets/stars-svgrepo-com.svg" alt="stars" />
+        </button>
+      </div>
+      <div class="copyrigth">
+        <p>By: Andrés Jaramillo - <span id="anoActual"></span></p>
+
+        <script>
+          document.getElementById("anoActual").innerHTML =
+            new Date().getFullYear();
+        </script>
+      </div>
+    </div>
+
+    <script>
+      function generateQRCode() {
+        let url = document.getElementById("urlInput").value;
+        let qrcodeDiv = document.getElementById("qrcode");
+        let downloadBtn = document.getElementById("downloadBtn");
+
+        // Clear previous QR code
+        qrcodeDiv.innerHTML = "";
+
+        // Generate new QR code
+        let qrcode = new QRCode(qrcodeDiv, {
+          text: url,
+          width: 200,
+          height: 200,
+          correctLevel: QRCode.CorrectLevel.L,
+        });
+
+        // Display download button
+        downloadBtn.style.display = "block";
+      }
+
+      function downloadQRCode() {
+        let qrcodeDiv = document.getElementById("qrcode");
+
+        // Use html2canvas to capture the content of the div
+        html2canvas(qrcodeDiv, { width: 200, height: 200 }).then(function (
+          canvas
+        ) {
+          // Convert canvas to data URL
+          let dataURL = canvas.toDataURL("image/jpeg");
+
+          // Create a temporary link and trigger a download
+          let link = document.createElement("a");
+          link.href = dataURL;
+          link.download = "qrcode.jpg";
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        });
+      }
+    </script>
+  </body>
+</html>
