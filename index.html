@@ -54,15 +54,15 @@
 
     <script>
       function generateQRCode() {
-        let url = document.getElementById("urlInput").value;
-        let qrcodeDiv = document.getElementById("qrcode");
-        let downloadBtn = document.getElementById("downloadBtn");
+        const url = document.getElementById("urlInput").value;
+        const qrcodeDiv = document.getElementById("qrcode");
+        const downloadBtn = document.getElementById("downloadBtn");
 
         // Clear previous QR code
         qrcodeDiv.innerHTML = "";
 
         // Generate new QR code
-        let qrcode = new QRCode(qrcodeDiv, {
+        new QRCode(qrcodeDiv, {
           text: url,
           width: 200,
           height: 200,
@@ -74,17 +74,15 @@
       }
 
       function downloadQRCode() {
-        let qrcodeDiv = document.getElementById("qrcode");
+        const qrcodeDiv = document.getElementById("qrcode");
 
         // Use html2canvas to capture the content of the div
-        html2canvas(qrcodeDiv, { width: 200, height: 200 }).then(function (
-          canvas
-        ) {
+        html2canvas(qrcodeDiv, { width: 200, height: 200 }).then((canvas) => {
           // Convert canvas to data URL
-          let dataURL = canvas.toDataURL("image/jpeg");
+          const dataURL = canvas.toDataURL("image/jpeg");
 
           // Create a temporary link and trigger a download
-          let link = document.createElement("a");
+          const link = document.createElement("a");
           link.href = dataURL;
           link.download = "qrcode.jpg";
           document.body.appendChild(link);
